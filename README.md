@@ -3,9 +3,10 @@
 **Use the GCC compiler to compile the program. Run the following command in your terminal:**
 
 
-gcc -o rip_router rip_router.c
+gcc rip_router.c -o rip_router
 
 This will create an executable file named rip_router.
+
 
 
 **Run the Program:**
@@ -14,14 +15,18 @@ The program requires at least one router ID and its neighbors as arguments. Run 
 ./rip_router <router_id> <neighbor_router_ids>...
 
 
+
 **Example:**
 If you want to simulate Router 1 with neighbors Router 2 and Router 3, run:
 
 ./rip_router 1 2 3
 
+
+
 **Note:**
 
 Each router runs as a separate instance. Open multiple terminal windows, and run the program for each router with its respective router ID and neighbors.
+
 
 
 **For Router 1:**
