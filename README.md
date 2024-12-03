@@ -3,6 +3,23 @@
 **Use the GCC compiler to compile the program. Run the following command in your terminal:**
 
 
+**Static Code(Static Implementation of the RIP Protocol):**
+
+gcc rip_static.c -o rip_static
+
+This will create an executable file named rip_static. Here, all the routing information of all the router is predefined i.e its cost-distance. 
+
+
+
+**Run the Program:**
+
+./rip_static
+
+
+
+
+**Dynamic Code(Dynamic Implementation of the RIP Protocol):**
+
 gcc rip_router.c -o rip_router
 
 This will create an executable file named rip_router.
