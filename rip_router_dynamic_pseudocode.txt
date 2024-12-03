@@ -1,0 +1,40 @@
+function send_rip_packet(socket_fd, dest_addr, packet):
+    send packet to destination address via UDP socket
+
+function receive_rip_packet(socket_fd, packet):
+    receive packet from UDP socket
+
+function update_routing_table(router, packet):
+    for each entry in packet.entries:
+        if entry.destination exists in router's table:
+            calculate new_cost = entry.cost + 1
+            if new_cost < router's current cost:
+                update cost and next_hop
+        else:
+            add new entry to router's table with cost = entry.cost + 1
+
+function send_periodic_updates(socket_fd, neighbor_addrs, num_neighbors, router):
+    create RIPPacket with source_router = router ID
+    copy router's table to packet.entries
+    for each neighbor in neighbor_addrs:
+        send_rip_packet(socket_fd, neighbor, packet)
+
+function print_routing_table(router):
+    print router ID and all entries in the routing table
+
+function main(router_id, neighbor_ids):
+    initialize router with router_id
+    create UDP socket and bind to local address
+    setup neighbor addresses using neighbor_ids
+
+    last_update = current time
+    while true:
+        if current time - last_update >= UPDATE_INTERVAL:
+            send_periodic_updates(socket_fd, neighbor_addrs, num_neighbors, router)
+            last_update = current time
+        
+        set timeout for incoming packets
+        if packet available on socket:
+            receive_rip_packet(socket_fd, packet)
+            update_routing_table(router, packet)
+            print_routing_table(router)

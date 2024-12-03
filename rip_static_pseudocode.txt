@@ -1,0 +1,37 @@
+function initializeNodes():
+    for each node i in NUM_NODES:
+        set node ID to i
+        for each destination j in NUM_NODES:
+            if i == j:
+                set metric = 0, next_hop = i
+            else:
+                set metric = INF, next_hop = -1
+        initialize direct neighbor distances
+
+function sendRoutingUpdate(from, to):
+    for each destination i in routing table of "from":
+        if i != from:  // Apply Split Horizon
+            new_metric = routing_table[from][i].metric + routing_table[from][to].metric
+            if new_metric < routing_table[to][i].metric:
+                routing_table[to][i].metric = new_metric
+                routing_table[to][i].next_hop = from
+
+function updateRoutingTables():
+    for each node i in NUM_NODES:
+        for each neighbor j in NUM_NODES:
+            if i != j and routing_table[i][j].metric != INF:
+                sendRoutingUpdate(i, j)
+
+function printRoutingTables():
+    for each node i in NUM_NODES:
+        print "Routing Table for Node i"
+        for each destination j in NUM_NODES:
+            print destination, next_hop, metric
+
+function main():
+    initializeNodes()
+    printRoutingTables()
+
+    for iteration from 1 to 5:
+        updateRoutingTables()
+        printRoutingTables()
